@@ -2,6 +2,7 @@ import React , {Component} from 'react';
 import './Traffic.css'
 import classNames from 'classnames'
 import {Link} from 'react-router-dom'
+import cookies from 'js-cookie'
 const RED = 0 ;
 const ORANGE = 1 ;
 const GREEN = 2;
@@ -31,8 +32,9 @@ class Traffic extends Component {
         }
     }
     render(){
-      
-        const {currentColor} = this.state;
+      /*   console.log(localStorage.getItem('login')); */
+      const {currentColor} = this.state;
+       if(cookies.get('idlogin')){
         return(
             <div className='TrafficLight'>
                 <div className={classNames('bulb' , 'red' , {active : currentColor === 0})}></div>
@@ -42,7 +44,14 @@ class Traffic extends Component {
                 <Link to='/'>Trang chinh</Link>
                 
             </div>
-        )
+        )    
+       }
+       else{
+    
+            window.location.href = 'http://localhost:3000/'
+       }
+
+    
            
     }
 }

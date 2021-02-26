@@ -2,6 +2,7 @@ import React from 'react';
 import {Component} from 'react';
 import {Link} from 'react-router-dom'
 import './todo.css'
+import cookies  from 'js-cookie'
 
 class TodoItem extends Component{
         constructor(props){
@@ -33,6 +34,11 @@ class TodoItem extends Component{
             .catch(err => console.log(err))
             
     }
+    Logout(){
+       /*  localStorage.removeItem('login'); */
+      /*  document.cookie = 'login=; expires=Thu, 01 Jan 1970 00:00:00 UTC'; */
+      cookies.remove('login');
+    }
     render(){
  /*        let className = 'TodoItem';
         if(this.props.item.isComplete === true){
@@ -42,8 +48,7 @@ class TodoItem extends Component{
             <div className='TodoItem'>
            <p>{this.state.data.map(i=> <li>{i.Name}</li>)}</p>
            <button onClick={this.clickMe.bind(this)}>click de xoa state</button>  
-           <input type="text" id='text' onKeyUp={this.Search.bind(this)}></input>
-    
+           <input type="text" id='text' placeholder='nhap de tim kiem' onKeyUp={this.Search.bind(this)}></input>
            <Link to='/traffic/123'>Traffic</Link> 
            </div>
         )    

@@ -1,4 +1,5 @@
 import React , {Component} from 'react';
+import PropTypes from 'prop-types'
 import './Traffic.css'
 import classNames from 'classnames'
 import {Link} from 'react-router-dom'
@@ -6,24 +7,16 @@ import cookies from 'js-cookie'
 const RED = 0 ;
 const ORANGE = 1 ;
 const GREEN = 2;
-
 class Traffic extends Component {
     constructor(props){ //truyen props vao ham khoi tao de su dung
         super(props);
-        this.state = {
-            currentColor : RED
-        }
+            this.state = {
+                currentColor : RED,
+                time : this.props.time
+            }
+ 
+        } 
 
-        setInterval(()=>{
-            this.setState({
-                currentColor : this.nextColor(this.state.currentColor)
-            })
-    
-        
-     
-        },this.props.time)
-    
-    }
      nextColor(color){
         switch(color){
             case RED : return ORANGE ;
@@ -48,11 +41,60 @@ class Traffic extends Component {
        }
        else{
     
-            window.location.href = 'http://localhost:3000/'
+            window.location.href = 'http://localhost:3000/login'
        }
 
     
            
     }
+    componentDidMount()
+    {
+          this.setState({
+              currentColor : RED        
+          })
+     
+    }
+
+    componentDidUpdate(){
+        console.log('didupdate');
+        console.log(this.state.time);
+        if(this.timer){
+            clearInterval(this.timer);
+        
+        }
+        this.timer= setInterval(()=>{
+            if(this.state.currentColor === RED){
+            this.setState({
+                currentColor : this.nextColor(this.state.currentColor),
+                time : 5000
+            })
+    
+        }
+            else if(this.state.currentColor === ORANGE){
+                this.setState({
+                    currentColor : this.nextColor(this.state.currentColor),
+                    time : 8000
+                })
+            }
+            else{
+                this.setState({
+                    currentColor : this.nextColor(this.state.currentColor),
+                    time : 2000
+                })
+            }
+     
+        },this.state.time)
+    }
+
+    componentWillUnmount(){
+        console.log('tam biet');
+        if(this.timer)
+        clearInterval(this.timer); //clear di interval khi component umount
+    }
+
+}
+
+Traffic.propTypes = {  // quy dinh kieu du lieu cua props truyen vao    
+    time : PropTypes.number
 }
 export default Traffic;

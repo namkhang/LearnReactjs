@@ -8,10 +8,12 @@
     "@testing-library/user-event": "^7.2.1",
     "classnames": "^2.2.6",
     "js-cookie": "^2.2.1",
-    "react": "^16.13.1",
+    "prop-types": "^15.7.2",
+    "react": "0.0.0-d857f9e4d",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "socket.io-client": "^3.1.2"
   },
   "scripts": {
     "start": "react-scripts start",

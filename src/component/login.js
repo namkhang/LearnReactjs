@@ -1,9 +1,12 @@
 import React , {Component} from 'react';
 import Context from '../ContextApi/context'
 import Cookies from 'js-cookie';
+import FacebookLogin  from 'react-facebook-login'
+import { GoogleLogin } from 'react-google-login';
 import '../App.css'
 import io from 'socket.io-client'
 let socket = io('http://localhost:5000');
+
 
 
 
@@ -75,6 +78,13 @@ class Login extends Component{
                 socket.emit('target' , event.target.innerHTML)
             }
 
+            responseFacebook(res){
+                console.log(res);
+            }
+            responseGoogle(res){
+                console.log(res);
+            }
+
         componentDidMount(){
         socket.on('error', function()
         {
@@ -98,6 +108,7 @@ class Login extends Component{
             alert(data)
          })
             }
+        
 
     render(){
         
@@ -114,6 +125,18 @@ class Login extends Component{
                             {(context)=><h2>{context.name}</h2>}
                         </Context.Consumer>
                      {this.state.listOnline.map((i,index) => <h2 onClick={this.Target.bind(this)} key={index}>{i.id}</h2>) }
+                     <FacebookLogin
+                        appId="338920947504839"
+                        autoLoad={false} // nếu là true thì sẽ chạy ngay khi vừa vào trang
+                         fields="name,email"
+                        callback={this.responseFacebook}
+                        />
+                        <GoogleLogin
+                        clientId="329434956793-n9dbb8s2g0oj1idb0do1sqk844f0khuj.apps.googleusercontent.com"
+                        buttonText="Login"
+                        onSuccess={this.responseGoogle}
+                        cookiePolicy={'single_host_origin'}
+  />
                 </div>
         )
         

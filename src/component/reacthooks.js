@@ -30,7 +30,7 @@ export default function TestReactHook({title}){
         return ()=>{
             console.log('tam biet');
         }
-    }) // [] này để chỉ ra khi nào effect sẽ được gọi
+    },[item.name]) // [] này để chỉ được chạy khi nào effect sẽ được gọi
 
     const contextConsumer = useContext(Context);
     return (
@@ -42,6 +42,7 @@ export default function TestReactHook({title}){
         <button onClick={contextConsumer.helloContext}>useContext</button>
         <button onClick={setName}>change name</button>
         <button onClick={setAge}>change age</button>
+        <button onClick={contextConsumer.changeNumber}>change number</button>
         <button onClick={DoubleAge}>Double age</button>
         <button onClick={serverhello}>Call Socket</button>
         </div>
